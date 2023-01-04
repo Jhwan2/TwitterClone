@@ -1,13 +1,13 @@
 //
-//  ConversationsController.swift
+//  RegistrationController.swift
 //  TwitterCloneApp
 //
-//  Created by 이주환 on 2023/01/02.
+//  Created by 이주환 on 2023/01/04.
 //
 
 import UIKit
 
-class ConversationsController: UIViewController {
+class RegistrationController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,8 +16,6 @@ class ConversationsController: UIViewController {
     }
     
     func configureUI() {
-        view.backgroundColor = .white
-        navigationItem.title = "Conversations"
+        view.backgroundColor = .twitterBlue
     }
-
 }

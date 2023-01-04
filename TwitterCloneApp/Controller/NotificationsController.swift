@@ -18,12 +18,6 @@ class NotificationsController: UIViewController {
     func configureUI() {
         view.backgroundColor = .white
         navigationItem.title = "Notifications"
-        
-        self.navigationController?.navigationBar.layer.shadowColor = UIColor.black.cgColor
-        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        self.navigationController?.navigationBar.layer.shadowRadius = 4.0
-        self.navigationController?.navigationBar.layer.shadowOpacity = 1.0
-        self.navigationController?.navigationBar.layer.masksToBounds = false
     }
 
 }

@@ -17,6 +17,10 @@
 		D8A1C8B42962CA5C008500AB /* ExploerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A1C8B32962CA5C008500AB /* ExploerController.swift */; };
 		D8A1C8B62962CA6D008500AB /* NotificationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A1C8B52962CA6D008500AB /* NotificationsController.swift */; };
 		D8A1C8B82962CA87008500AB /* ConversationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A1C8B72962CA87008500AB /* ConversationsController.swift */; };
+		D8A1C8BA29657AE0008500AB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A1C8B929657AE0008500AB /* Extensions.swift */; };
+		D8A1C8BD29658324008500AB /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A1C8BC29658324008500AB /* LoginController.swift */; };
+		D8A1C8BF29658351008500AB /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A1C8BE29658351008500AB /* RegistrationController.swift */; };
+		D8A1C8C129659318008500AB /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A1C8C029659318008500AB /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +36,10 @@
 		D8A1C8B32962CA5C008500AB /* ExploerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploerController.swift; sourceTree = "<group>"; };
 		D8A1C8B52962CA6D008500AB /* NotificationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsController.swift; sourceTree = "<group>"; };
 		D8A1C8B72962CA87008500AB /* ConversationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsController.swift; sourceTree = "<group>"; };
+		D8A1C8B929657AE0008500AB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		D8A1C8BC29658324008500AB /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		D8A1C8BE29658351008500AB /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
+		D8A1C8C029659318008500AB /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +98,7 @@
 		D8A1C8AA2962C8A8008500AB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D8A1C8BB296582F5008500AB /* Authentication */,
 				D8A1C8AF2962C9D1008500AB /* MainTabController.swift */,
 				D8A1C8B12962CA44008500AB /* FeedController.swift */,
 				D8A1C8B32962CA5C008500AB /* ExploerController.swift */,
@@ -123,8 +132,19 @@
 		D8A1C8AE2962C8F7008500AB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				D8A1C8B929657AE0008500AB /* Extensions.swift */,
+				D8A1C8C029659318008500AB /* Utilities.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		D8A1C8BB296582F5008500AB /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				D8A1C8BC29658324008500AB /* LoginController.swift */,
+				D8A1C8BE29658351008500AB /* RegistrationController.swift */,
+			);
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,9 +222,13 @@
 				D8A1C8B82962CA87008500AB /* ConversationsController.swift in Sources */,
 				D8A1C8962962C899008500AB /* AppDelegate.swift in Sources */,
 				D8A1C8982962C899008500AB /* SceneDelegate.swift in Sources */,
+				D8A1C8BD29658324008500AB /* LoginController.swift in Sources */,
 				D8A1C8B02962C9D1008500AB /* MainTabController.swift in Sources */,
+				D8A1C8BA29657AE0008500AB /* Extensions.swift in Sources */,
 				D8A1C8B22962CA44008500AB /* FeedController.swift in Sources */,
+				D8A1C8BF29658351008500AB /* RegistrationController.swift in Sources */,
 				D8A1C8B42962CA5C008500AB /* ExploerController.swift in Sources */,
+				D8A1C8C129659318008500AB /* Utilities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

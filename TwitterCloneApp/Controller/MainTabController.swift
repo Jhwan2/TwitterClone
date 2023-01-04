@@ -9,11 +9,31 @@ import UIKit
 
 class MainTabController: UITabBarController {
     
+    let actionButton: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.backgroundColor = .twitterBlue
+        btn.tintColor = .white
+        btn.setImage(UIImage(named: "new_tweet"), for: .normal)
+        btn.addTarget(MainTabController.self, action: #selector(actionButtonTapped), for: .touchUpInside)
+        return btn
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         configureViewController()
+        configureUI()
+    }
+    
+    @objc func actionButtonTapped() {
+        print("2222")
+    }
+    
+    func configureUI(){
         tabBar.layer.applyShadow()
+        view.backgroundColor = .white
+        view.addSubview(actionButton)
+        actionButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingBottom: 64, paddingRight: 16, width: 56, height: 56)
+        actionButton.layer.cornerRadius = 56 / 2
     }
     
     func configureViewController() {
@@ -38,25 +58,11 @@ class MainTabController: UITabBarController {
         nav.tabBarItem.image = image
         nav.navigationBar.barTintColor = .white
         nav.navigationBar.backgroundColor = .white
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.backgroundColor = .white
+        nav.navigationBar.standardAppearance = navigationBarAppearance
+        nav.navigationBar.scrollEdgeAppearance = navigationBarAppearance
         return nav
-    }
-    
-    
-}
-
-extension CALayer {
-    // Sketch 스타일의 그림자를 생성하는 유틸리티 함수
-    func applyShadow(
-        color: UIColor = .black,
-        alpha: Float = 0.5,
-        x: CGFloat = 0,
-        y: CGFloat = 2,
-        blur: CGFloat = 4
-    ) {
-        shadowColor = color.cgColor
-        shadowOpacity = alpha
-        shadowOffset = CGSize(width: x, height: y)
-        shadowRadius = blur / 2.0
     }
     
     
