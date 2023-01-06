@@ -48,6 +48,16 @@ class LoginController: UIViewController {
         btn.titleLabel?.font = .boldSystemFont(ofSize: 20)
         return btn
     }()
+    
+    private let singUpButton: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("Sign Up", for: .normal)
+        btn.setTitleColor(.twitterBlue, for: .normal)
+        btn.backgroundColor = .white
+        btn.anchor(height: 30)
+        btn.layer.cornerRadius = 5
+        return btn
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +78,8 @@ class LoginController: UIViewController {
         
         view.addSubview(stack)
         stack.anchor(top: logoImageView.bottomAnchor,left: view.leftAnchor,right: view.rightAnchor,paddingLeft: 32,paddingRight: 32)
+        
+        view.addSubview(singUpButton)
     }
     
 }
