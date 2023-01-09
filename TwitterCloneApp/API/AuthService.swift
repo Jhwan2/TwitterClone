@@ -19,6 +19,11 @@ struct AuthCredentials {
 struct AuthService {
     static let shard = AuthService()
     
+    func logUserIn(withEmail email: String, password: String, completion: @escaping (AuthDataResult?,Error?) -> Void) {
+        Auth.auth().signIn(withEmail: email, password: password, completion: completion)
+        
+    }
+    
     func registerUser(credentail: AuthCredentials, completion: @escaping(Error?, DatabaseReference)-> Void) {
         let email = credentail.email
         let pw = credentail.password
