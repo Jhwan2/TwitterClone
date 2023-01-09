@@ -38,5 +38,15 @@ class Utilities {
         return tf
     }
     
+    func attributedButton(_ firstPart: String, _ secondPart: String) -> UIButton {
+        let btn = UIButton()
+        
+        let attributedTitle = NSMutableAttributedString(string: firstPart, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16),NSAttributedString.Key.foregroundColor: UIColor.white])
+        attributedTitle.append(NSMutableAttributedString(string: secondPart, attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16),NSAttributedString.Key.foregroundColor: UIColor.white]))
+        btn.setAttributedTitle(attributedTitle, for: .normal)
+        
+        return btn
+    }
+    
     
 }

@@ -7,7 +7,8 @@
 
 import UIKit
 
-class LoginController: UIViewController {
+final class LoginController: UIViewController {
+    //MARK: Properties
     
     let logoImageView: UIImageView = {
         let iv = UIImageView()
@@ -46,25 +47,37 @@ class LoginController: UIViewController {
         btn.anchor(height: 50)
         btn.layer.cornerRadius = 5
         btn.titleLabel?.font = .boldSystemFont(ofSize: 20)
+        btn.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return btn
     }()
     
-    private let singUpButton: UIButton = {
-        let btn = UIButton()
-        btn.setTitle("Sign Up", for: .normal)
-        btn.setTitleColor(.twitterBlue, for: .normal)
-        btn.backgroundColor = .white
-        btn.anchor(height: 30)
-        btn.layer.cornerRadius = 5
+    private let dontHaveAccountButton: UIButton = {
+        let btn = Utilities().attributedButton("Don't have an account?", " Sign Up")
+        btn.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
         return btn
     }()
 
+    
+    //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         // Do any additional setup after loading the view.
     }
     
+    
+    //MARK: Selecters
+    @objc func handleLogin() {
+        print("LogIn button Tapped !")
+    }
+    
+    @objc func handleShowSignUp(){
+        let vc = RegistrationController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
+    //MARK: Helpers
     func configureUI() {
         view.backgroundColor = .twitterBlue
         view.addSubview(logoImageView)
@@ -79,7 +92,9 @@ class LoginController: UIViewController {
         view.addSubview(stack)
         stack.anchor(top: logoImageView.bottomAnchor,left: view.leftAnchor,right: view.rightAnchor,paddingLeft: 32,paddingRight: 32)
         
-        view.addSubview(singUpButton)
+        view.addSubview(dontHaveAccountButton)
+        dontHaveAccountButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor,paddingBottom: 16)
+        dontHaveAccountButton.centerX(inView: view)
     }
     
 }
