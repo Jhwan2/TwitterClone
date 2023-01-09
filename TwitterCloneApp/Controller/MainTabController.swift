@@ -4,11 +4,12 @@
 //
 //  Created by 이주환 on 2023/01/02.
 //
-
+import Firebase
 import UIKit
 
 class MainTabController: UITabBarController {
     
+    //MARK: Properties
     let actionButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.backgroundColor = .twitterBlue
@@ -18,16 +19,46 @@ class MainTabController: UITabBarController {
         return btn
     }()
     
+    
+    //MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureViewController()
-        configureUI()
+//        UserLogOut()
+        view.backgroundColor = .twitterBlue
+        authenticateUserAndConfigureUI()
     }
     
+    //MARK: API
+    
+    func authenticateUserAndConfigureUI() {
+        if Auth.auth().currentUser == nil {
+            DispatchQueue.main.async {
+                let nav = UINavigationController(rootViewController: LoginController())
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: true)
+            }
+        } else {
+            configureUI()
+            configureViewController()
+        }
+    }
+    
+    func UserLogOut() {
+        do {
+            try Auth.auth().signOut()
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    
+    //MARK: Selectors
     @objc func actionButtonTapped() {
         print("2222")
     }
     
+    
+    //MARK: Helpers
     func configureUI(){
         tabBar.layer.applyShadow()
         view.backgroundColor = .white

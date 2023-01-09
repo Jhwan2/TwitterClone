@@ -23,6 +23,8 @@
 		D8A1C8BF29658351008500AB /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A1C8BE29658351008500AB /* RegistrationController.swift */; };
 		D8A1C8C129659318008500AB /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A1C8C029659318008500AB /* Utilities.swift */; };
 		D8A1C8C3296AAE81008500AB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8A1C8C2296AAE81008500AB /* GoogleService-Info.plist */; };
+		D8A1C8C5296C12ED008500AB /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A1C8C4296C12ED008500AB /* Constans.swift */; };
+		D8A1C8C7296C2270008500AB /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A1C8C6296C2270008500AB /* AuthService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		D8A1C8BE29658351008500AB /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		D8A1C8C029659318008500AB /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		D8A1C8C2296AAE81008500AB /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		D8A1C8C4296C12ED008500AB /* Constans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
+		D8A1C8C6296C2270008500AB /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +78,6 @@
 				6FD25AAE52139A403CAC7A77 /* Pods-TwitterCloneApp.debug.xcconfig */,
 				5DE8FF921F4065931C1A5AFB /* Pods-TwitterCloneApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -119,6 +122,7 @@
 		D8A1C8A92962C8A4008500AB /* API */ = {
 			isa = PBXGroup;
 			children = (
+				D8A1C8C6296C2270008500AB /* AuthService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -162,6 +166,7 @@
 			children = (
 				D8A1C8B929657AE0008500AB /* Extensions.swift */,
 				D8A1C8C029659318008500AB /* Utilities.swift */,
+				D8A1C8C4296C12ED008500AB /* Constans.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -293,9 +298,11 @@
 			files = (
 				D8A1C8B62962CA6D008500AB /* NotificationsController.swift in Sources */,
 				D8A1C8B82962CA87008500AB /* ConversationsController.swift in Sources */,
+				D8A1C8C5296C12ED008500AB /* Constans.swift in Sources */,
 				D8A1C8962962C899008500AB /* AppDelegate.swift in Sources */,
 				D8A1C8982962C899008500AB /* SceneDelegate.swift in Sources */,
 				D8A1C8BD29658324008500AB /* LoginController.swift in Sources */,
+				D8A1C8C7296C2270008500AB /* AuthService.swift in Sources */,
 				D8A1C8B02962C9D1008500AB /* MainTabController.swift in Sources */,
 				D8A1C8BA29657AE0008500AB /* Extensions.swift in Sources */,
 				D8A1C8B22962CA44008500AB /* FeedController.swift in Sources */,

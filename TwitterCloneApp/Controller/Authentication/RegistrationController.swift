@@ -12,6 +12,7 @@ final class RegistrationController: UIViewController {
 
     //MARK: Properties
     private let imagePicker = UIImagePickerController()
+    private var profileImage: UIImage?
     
     let plusPhotoButton: UIButton = {
         let btn = UIButton(type: .system)
@@ -99,17 +100,21 @@ final class RegistrationController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     @objc func handleRegistration(){
+        
+        guard let profileImage = profileImage else { return
+            print("select your profileImage plz ..")
+        }
         guard let email = emailTextField.text else { return }
         guard let pw = passwordTextField.text else { return }
+        guard let fullname = fullNameTextField.text else { return }
+        guard let username = userNameTextField.text else { return }
         
-        Auth.auth().createUser(withEmail: email, password: pw) { resulted, error in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            print("successfully user info")
+        let credential = AuthCredentials(email: email, password: pw, username: username, fullname: fullname, profileImage: profileImage)
+        
+        AuthService.shard.registerUser(credentail: credential) { error, ref in
+            print("Scccessfully update user information. ")
             self.navigationController?.popViewController(animated: true)
         }
-        
     }
     
     //MARK: Helpers
@@ -144,6 +149,7 @@ final class RegistrationController: UIViewController {
 extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let safeImage = info[.editedImage] as? UIImage else { return }
+        self.profileImage = safeImage
         
         plusPhotoButton.layer.cornerRadius = 128/2
         plusPhotoButton.layer.masksToBounds = true

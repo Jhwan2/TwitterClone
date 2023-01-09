@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 final class LoginController: UIViewController {
     //MARK: Properties
