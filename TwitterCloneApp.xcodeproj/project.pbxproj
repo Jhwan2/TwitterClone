@@ -25,6 +25,9 @@
 		D8A1C8C3296AAE81008500AB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8A1C8C2296AAE81008500AB /* GoogleService-Info.plist */; };
 		D8A1C8C5296C12ED008500AB /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A1C8C4296C12ED008500AB /* Constans.swift */; };
 		D8A1C8C7296C2270008500AB /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A1C8C6296C2270008500AB /* AuthService.swift */; };
+		D8A1C8C9296D48F7008500AB /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A1C8C8296D48F7008500AB /* UserService.swift */; };
+		D8A1C8CB296D4E8E008500AB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A1C8CA296D4E8E008500AB /* User.swift */; };
+		D8A1C8CD296D6517008500AB /* UploadTweetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A1C8CC296D6517008500AB /* UploadTweetController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +53,9 @@
 		D8A1C8C2296AAE81008500AB /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		D8A1C8C4296C12ED008500AB /* Constans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
 		D8A1C8C6296C2270008500AB /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		D8A1C8C8296D48F7008500AB /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		D8A1C8CA296D4E8E008500AB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D8A1C8CC296D6517008500AB /* UploadTweetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTweetController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				D8A1C8C6296C2270008500AB /* AuthService.swift */,
+				D8A1C8C8296D48F7008500AB /* UserService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -136,6 +143,7 @@
 				D8A1C8B32962CA5C008500AB /* ExploerController.swift */,
 				D8A1C8B52962CA6D008500AB /* NotificationsController.swift */,
 				D8A1C8B72962CA87008500AB /* ConversationsController.swift */,
+				D8A1C8CC296D6517008500AB /* UploadTweetController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -157,6 +165,7 @@
 		D8A1C8AD2962C8B2008500AB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D8A1C8CA296D4E8E008500AB /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -296,6 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8A1C8C9296D48F7008500AB /* UserService.swift in Sources */,
 				D8A1C8B62962CA6D008500AB /* NotificationsController.swift in Sources */,
 				D8A1C8B82962CA87008500AB /* ConversationsController.swift in Sources */,
 				D8A1C8C5296C12ED008500AB /* Constans.swift in Sources */,
@@ -303,6 +313,8 @@
 				D8A1C8982962C899008500AB /* SceneDelegate.swift in Sources */,
 				D8A1C8BD29658324008500AB /* LoginController.swift in Sources */,
 				D8A1C8C7296C2270008500AB /* AuthService.swift in Sources */,
+				D8A1C8CD296D6517008500AB /* UploadTweetController.swift in Sources */,
+				D8A1C8CB296D4E8E008500AB /* User.swift in Sources */,
 				D8A1C8B02962C9D1008500AB /* MainTabController.swift in Sources */,
 				D8A1C8BA29657AE0008500AB /* Extensions.swift in Sources */,
 				D8A1C8B22962CA44008500AB /* FeedController.swift in Sources */,

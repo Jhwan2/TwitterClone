@@ -48,5 +48,11 @@ class Utilities {
         return btn
     }
     
+    func configureNavigationBar()-> UINavigationBarAppearance {
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.backgroundColor = .white
+        return navigationBarAppearance
+    }
+    
     
 }

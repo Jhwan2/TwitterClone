@@ -113,7 +113,12 @@ final class RegistrationController: UIViewController {
         
         AuthService.shard.registerUser(credentail: credential) { error, ref in
             print("Scccessfully update user information. ")
-            self.navigationController?.popViewController(animated: true)
+            
+            guard let window = UIApplication.shared.windows.first(where: {$0.isKeyWindow}) else { return }
+            guard let tab = window.rootViewController as? MainTabController else { return }
+            tab.authenticateUserAndConfigureUI()
+            
+            self.dismiss(animated: true)
         }
     }
     

@@ -10,15 +10,22 @@ import UIKit
 class MainTabController: UITabBarController {
     
     //MARK: Properties
+    var user: User? {
+        didSet{
+            guard let nav = viewControllers?[0] as? UINavigationController else { return }
+            guard let feed = nav.viewControllers.first as? FeedController else { return }
+            feed.user = user
+        }
+    }
+    
     let actionButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.backgroundColor = .twitterBlue
         btn.tintColor = .white
         btn.setImage(UIImage(named: "new_tweet"), for: .normal)
-        btn.addTarget(MainTabController.self, action: #selector(actionButtonTapped), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
         return btn
     }()
-    
     
     //MARK: LifeCycles
     override func viewDidLoad() {
@@ -29,6 +36,11 @@ class MainTabController: UITabBarController {
     }
     
     //MARK: API
+    func fetchUser() {
+        UserService.shard.fetchUser { user in
+            self.user = user
+        }
+    }
     
     func authenticateUserAndConfigureUI() {
         if Auth.auth().currentUser == nil {
@@ -40,11 +52,13 @@ class MainTabController: UITabBarController {
         } else {
             configureUI()
             configureViewController()
+            fetchUser()
         }
     }
     
     func UserLogOut() {
         do {
+            print("User log out ..")
             try Auth.auth().signOut()
         } catch let error {
             print(error.localizedDescription)
@@ -54,7 +68,11 @@ class MainTabController: UITabBarController {
     
     //MARK: Selectors
     @objc func actionButtonTapped() {
-        print("2222")
+        guard let user = self.user else { return }
+        let con = UploadTweetController(user: user)
+        let nav = UINavigationController(rootViewController: con)
+        nav.modalPresentationStyle = .fullScreen
+        self.present(nav, animated: true)
     }
     
     
