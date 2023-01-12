@@ -12,9 +12,18 @@ class FeedController: UIViewController {
     
     
     //MARK: Properties
+    
     var user: User? {
         didSet{
             configureLeftBarButton()
+        }
+    }
+    
+    
+    //MARK: API
+    func fetchTweets() {
+        TweetService.shard.fetchTweets { tweet in
+            print(tweet)
         }
     }
 
@@ -22,6 +31,7 @@ class FeedController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        fetchTweets()
         // Do any additional setup after loading the view.
     }
     
@@ -33,7 +43,11 @@ class FeedController: UIViewController {
         imageView.setDimensions(width: 44, height: 44)
         navigationItem.titleView = imageView
         
+//        view.addSubview(collectionView)
+//        collectionView.backgroundColor = .red
+//        collectionView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
     }
+    
     func configureLeftBarButton() {
         guard let user = self.user else { return }
         let profileImageView = UIImageView()

@@ -36,6 +36,8 @@ class UploadTweetController: UIViewController {
         return iv
     }()
     
+    private let captionTextView = CaptionTextView()
+    
     //MARK: LifeCycle
     init(user: User) {
         self.user = user
@@ -61,7 +63,11 @@ class UploadTweetController: UIViewController {
     }
     
     @objc func handleUploadTweet() {
-        print(#function)
+        guard let caption = captionTextView.text else { return }
+        TweetService.shard.uploadTweet(caption: caption) { ref, error in
+//            print("seccessfully upload Tweet")
+            self.dismiss(animated: true)
+        }
     }
     
     
@@ -70,8 +76,12 @@ class UploadTweetController: UIViewController {
         view.backgroundColor = .white
         configureNavigationBar()
         
-        view.addSubview(profileImageView)
-        profileImageView.anchor(top: view.safeAreaLayoutGuide.topAnchor,left: view.leftAnchor,paddingTop: 16,paddingLeft: 16)
+        let stack = UIStackView(arrangedSubviews: [profileImageView, captionTextView])
+        stack.axis = .horizontal
+        stack.spacing = 12
+        
+        view.addSubview(stack)
+        stack.anchor(top: view.safeAreaLayoutGuide.topAnchor,left: view.leftAnchor,right: view.rightAnchor ,paddingTop: 16,paddingLeft: 16, paddingRight: 16)
         profileImageView.sd_setImage(with: user.profileImageUrl)
     }
     
