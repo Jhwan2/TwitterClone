@@ -28,10 +28,14 @@ struct TweetService {
         
         REF_TWEETS.observe(.childAdded) { snapshot in
             guard let dic = snapshot.value as? [String:Any] else { return }
+            guard let uid = dic["uid"] as? String else { return }
+            
             let tweetID = snapshot.key
-            let tweet = Tweet(tweetID: tweetID, dic: dic)
-            tweets.append(tweet)
-            completion(tweets)
+            UserService.shard.fetchUser(uid: uid) { user in
+                let tweet = Tweet(user: user,tweetID: tweetID, dic: dic)
+                tweets.append(tweet)
+                completion(tweets)
+            }
         }
     }
 }

@@ -18,6 +18,7 @@ class MainTabController: UITabBarController {
         }
     }
     
+    
     let actionButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.backgroundColor = .twitterBlue
@@ -37,7 +38,8 @@ class MainTabController: UITabBarController {
     
     //MARK: API
     func fetchUser() {
-        UserService.shard.fetchUser { user in
+        guard let uid = Auth.auth().currentUser?.uid as? String else { return }
+        UserService.shard.fetchUser(uid: uid) { user in
             self.user = user
         }
     }
@@ -87,7 +89,7 @@ class MainTabController: UITabBarController {
     
     func configureViewController() {
         self.tabBar.backgroundColor = .white
-        let feed = FeedController()
+        let feed = FeedController(collectionViewLayout: UICollectionViewFlowLayout())
         let nav1 = templateNavigationController(image: UIImage(named: "home_unselected"), rootViewController: feed)
         
         let exploer = ExploerController()
