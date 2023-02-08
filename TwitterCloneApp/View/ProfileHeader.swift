@@ -12,6 +12,11 @@ class ProfileHeader: UICollectionReusableView {
     //MARK: Properties
     private let filterBar = ProfileFilterView()
     
+    var user: User {
+        didSet{
+            configure()
+        }
+    }
     
     private lazy var profileImageView: UIImageView = {
         let iv = UIImageView()
@@ -83,6 +88,26 @@ class ProfileHeader: UICollectionReusableView {
         return view
     }()
     
+    private let followingLabel: UILabel = {
+        let lb = UILabel()
+        let followTap = UITapGestureRecognizer(target: self, action: #selector(handleFollowersTapped))
+        lb.isUserInteractionEnabled = true
+        lb.addGestureRecognizer(followTap)
+        lb.text = "0 Following"
+        
+        return lb
+    }()
+    
+    private let followersLabel: UILabel = {
+        let lb = UILabel()
+        let followTap = UITapGestureRecognizer(target: self, action: #selector(handleFollowingTapped))
+        lb.text = "2 Followers"
+        lb.isUserInteractionEnabled = true
+        lb.addGestureRecognizer(followTap)
+        
+        return lb
+    }()
+    
     //MARK: LifeCycle
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -110,6 +135,14 @@ class ProfileHeader: UICollectionReusableView {
         addSubview(userDetailStack)
         userDetailStack.anchor(top: profileImageView.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 8, paddingLeft: 12, paddingRight: 12)
         
+        let followeStack = UIStackView(arrangedSubviews: [followingLabel, followersLabel])
+        followeStack.axis = .horizontal
+        followeStack.spacing = 8
+        followeStack.distribution = .fillEqually
+        
+        addSubview(followeStack)
+        followeStack.anchor(top: userDetailStack.bottomAnchor, left: leftAnchor, paddingTop: 8, paddingLeft: 12)
+        
         addSubview(filterBar)
         filterBar.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor,height: 50)
         
@@ -126,11 +159,23 @@ class ProfileHeader: UICollectionReusableView {
     @objc func handleDismissal() {
         
     }
-    
     @objc func handleEditProfileFollow() {
         
     }
     
+    @objc func handleFollowingTapped() {
+        
+    }
+    @objc func handleFollowersTapped() {
+        
+    }
+    
+    
+    //MARK: Helpers
+    func configure() {
+        guard let user = user else { return }
+        let viewModel = ProfileHeaderViewModel(user: user)
+    }
 }
 
 //MARK:  ProfileFilterViewDelegate
