@@ -109,6 +109,7 @@ class MainTabController: UITabBarController {
         nav.tabBarItem.image = image
         nav.navigationBar.barTintColor = .white
         nav.navigationBar.backgroundColor = .white
+        
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.backgroundColor = .white
         nav.navigationBar.standardAppearance = navigationBarAppearance

@@ -24,15 +24,26 @@ enum ProfileFilterOptions: Int, CaseIterable {
 
 struct ProfileHeaderViewModel {
     private let user: User
+    
+    let usernameText: String
+    
     var followersString: NSAttributedString? {
         return attributedText(withValue: 0, text: "followers")
     }
     var followingString: NSAttributedString? {
         return attributedText(withValue: 2, text: "following")
     }
+    var actionButtonTitle: String {
+        if user.isCurrentUser {
+            return "Edit Profile"
+        } else {
+            return "Follow"
+        }
+    }
     
     init(user: User) {
         self.user = user
+        self.usernameText = "@" + user.username
     }
     private func attributedText(withValue value: Int, text: String) -> NSAttributedString {
         let attributedTitle = NSMutableAttributedString(string: "\(value)", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])

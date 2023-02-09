@@ -7,12 +7,18 @@
 
 import UIKit
 
+protocol ProfileHeaderDelegate: class {
+    func handleDissmissal()
+}
+
 class ProfileHeader: UICollectionReusableView {
     
     //MARK: Properties
+    weak var delegate: ProfileHeaderDelegate?
+    
     private let filterBar = ProfileFilterView()
     
-    var user: User {
+    var user: User? {
         didSet{
             configure()
         }
@@ -44,6 +50,7 @@ class ProfileHeader: UICollectionReusableView {
         var img = #imageLiteral(resourceName: "baseline_arrow_back_white_24dp")
         button.setImage(img.withRenderingMode(.alwaysOriginal), for: .normal)
         button.addTarget(self, action: #selector(handleDismissal), for: .touchUpInside)
+        
         return button
     }()
     
@@ -62,7 +69,6 @@ class ProfileHeader: UICollectionReusableView {
     private let fullnameLabel: UILabel = {
         let lb = UILabel()
         lb.font = UIFont.boldSystemFont(ofSize: 20)
-        lb.text = "Eddie Brock"
         return lb
     }()
     
@@ -70,7 +76,6 @@ class ProfileHeader: UICollectionReusableView {
         let lb = UILabel()
         lb.font = UIFont.systemFont(ofSize: 16)
         lb.textColor = .lightGray
-        lb.text = "@venom"
         return lb
     }()
     
@@ -157,10 +162,10 @@ class ProfileHeader: UICollectionReusableView {
     
     //MARK: Selectors
     @objc func handleDismissal() {
-        
+        delegate?.handleDissmissal()
     }
     @objc func handleEditProfileFollow() {
-        
+        print("follow Btn Tapped !")
     }
     
     @objc func handleFollowingTapped() {
@@ -175,6 +180,14 @@ class ProfileHeader: UICollectionReusableView {
     func configure() {
         guard let user = user else { return }
         let viewModel = ProfileHeaderViewModel(user: user)
+        followingLabel.attributedText = viewModel.followingString
+        followersLabel.attributedText = viewModel.followersString
+        
+        editProfileFollowButton.setTitle(viewModel.actionButtonTitle, for: .normal)
+        
+        profileImageView.sd_setImage(with: self.user?.profileImageUrl)
+        fullnameLabel.text = user.fullname
+        usernameLabel.text = viewModel.usernameText
     }
 }
 
