@@ -64,6 +64,19 @@ class TweetHeader: UICollectionReusableView {
         return btn
     }()
     
+    private lazy var retweetsLabel: UILabel = {
+        let lb = UILabel()
+        lb.font = .systemFont(ofSize: 14)
+        lb.text = "2 Retweets"
+        return lb
+    }()
+    
+    private lazy var likesLabel: UILabel = {
+        let lb = UILabel()
+        lb.font = .systemFont(ofSize: 14)
+        lb.text = "0 Likes"
+        return lb
+    }()
     
     //MARK: 2/14 요까지 14:32
     private lazy var statsView: UIView = {
@@ -72,7 +85,44 @@ class TweetHeader: UICollectionReusableView {
         divider1.backgroundColor = .systemGroupedBackground
         view.addSubview(divider1)
         divider1.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingLeft: 8, height: 1.0)
+        
+        let stack = UIStackView(arrangedSubviews: [retweetsLabel, likesLabel])
+        stack.axis = .horizontal
+        stack.spacing = 12
+        
+        view.addSubview(stack)
+        stack.centerY(inView: view)
+        stack.anchor(left: view.leftAnchor, paddingLeft: 16)
+        
+        let divider2 = UIView()
+        divider2.backgroundColor = .systemGroupedBackground
+        view.addSubview(divider2)
+        divider2.anchor(left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingLeft: 8, height: 1.0)
         return view
+    }()
+    
+    private lazy var commentButton: UIButton = {
+       let btn = createButton(withImageName: "comment")
+        btn.addTarget(self, action: #selector(handleCommentTapped), for: .touchUpInside)
+        return btn
+    }()
+    
+    private lazy var retweetButton: UIButton = {
+       let btn = createButton(withImageName: "retweet")
+        btn.addTarget(self, action: #selector(handleRetweetTapped), for: .touchUpInside)
+        return btn
+    }()
+    
+    private lazy var likeButton: UIButton = {
+       let btn = createButton(withImageName: "like")
+        btn.addTarget(self, action: #selector(handleLikeTapped), for: .touchUpInside)
+        return btn
+    }()
+    
+    private lazy var shareButton: UIButton = {
+       let btn = createButton(withImageName: "share")
+        btn.addTarget(self, action: #selector(handleShareTapped), for: .touchUpInside)
+        return btn
     }()
     
     //MARK: LifeCycle
@@ -101,6 +151,17 @@ class TweetHeader: UICollectionReusableView {
         optionButton.centerY(inView: stack)
         optionButton.anchor(right: rightAnchor, paddingRight: 8)
         
+        addSubview(statsView)
+        statsView.anchor(top: dateLabel.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 20, height: 40)
+        
+        let actionStack = UIStackView(arrangedSubviews: [commentButton, retweetButton, likeButton, shareButton])
+        actionStack.spacing = 72
+//        actionStack.axis = .horizontal
+//        actionStack.distribution = .fillEqually
+        
+        addSubview(actionStack)
+        actionStack.centerX(inView: self)
+        actionStack.anchor(bottom: bottomAnchor, paddingBottom: 12)
     }
     
     required init?(coder: NSCoder) {
@@ -108,12 +169,46 @@ class TweetHeader: UICollectionReusableView {
     }
     
     
-    //MARK: Helpers
+    //MARK: Selectors
     @objc func handleProfileImageTapped() {
         
     }
     
     @objc func showActionSheet() {
         
+    }
+    
+    @objc func handleRetweetsTapped() {
+        
+    }
+    
+    @objc func handleLikesTapped() {
+        
+    }
+    
+    @objc func handleCommentTapped() {
+        
+    }
+    
+    @objc func handleRetweetTapped() {
+        
+    }
+    
+    @objc func handleLikeTapped() {
+        
+    }
+    
+    @objc func handleShareTapped() {
+        
+    }
+    
+    
+    //MARK: Helpers
+    func createButton(withImageName imageName: String) -> UIButton {
+        let btn = UIButton(type: .system)
+        btn.setImage(UIImage(named: imageName), for: .normal)
+        btn.tintColor = .darkGray
+        btn.setDimensions(width: 20, height: 20)
+        return btn
     }
 }
