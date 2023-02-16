@@ -9,6 +9,12 @@ import UIKit
 
 class TweetHeader: UICollectionReusableView {
     
+    var tweet: Tweet? {
+        didSet{
+            configure()
+        }
+    }
+    
     //MARK: Properties
     private lazy var profileImageView: UIImageView = {
         let iv = UIImageView()
@@ -64,19 +70,8 @@ class TweetHeader: UICollectionReusableView {
         return btn
     }()
     
-    private lazy var retweetsLabel: UILabel = {
-        let lb = UILabel()
-        lb.font = .systemFont(ofSize: 14)
-        lb.text = "2 Retweets"
-        return lb
-    }()
-    
-    private lazy var likesLabel: UILabel = {
-        let lb = UILabel()
-        lb.font = .systemFont(ofSize: 14)
-        lb.text = "0 Likes"
-        return lb
-    }()
+    private lazy var retweetsLabel = UILabel()
+    private lazy var likesLabel = UILabel()
     
     //MARK: 2/14 요까지 14:32
     private lazy var statsView: UIView = {
@@ -210,5 +205,18 @@ class TweetHeader: UICollectionReusableView {
         btn.tintColor = .darkGray
         btn.setDimensions(width: 20, height: 20)
         return btn
+    }
+    
+    func configure() {
+        guard let tweet = tweet else { return }
+        let viewModel = TweetViewModel(tweet: tweet)
+        
+        captionLabel.text = tweet.caption
+        fullnameLabel.text = tweet.user.fullname
+        usernameLabel.text = viewModel.usernameText
+        profileImageView.sd_setImage(with: viewModel.profileImageUrl)
+        dateLabel.text = viewModel.headerTimestemp
+        retweetsLabel.attributedText = viewModel.retweetsAttributedString
+        likesLabel.attributedText = viewModel.likesAttributedString
     }
 }

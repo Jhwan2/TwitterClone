@@ -28,10 +28,10 @@ struct ProfileHeaderViewModel {
     let usernameText: String
     
     var followersString: NSAttributedString? {
-        return attributedText(withValue: user.stats?.followers ?? 0, text: " followers")
+        return attributedText(withValue: user.stats?.followers ?? 0, text: "followers")
     }
     var followingString: NSAttributedString? {
-        return attributedText(withValue: user.stats?.following ?? 0, text: " following")
+        return attributedText(withValue: user.stats?.following ?? 0, text: "following")
     }
     var actionButtonTitle: String {
         if user.isCurrentUser {
@@ -51,8 +51,8 @@ struct ProfileHeaderViewModel {
         self.usernameText = "@" + user.username
     }
     private func attributedText(withValue value: Int, text: String) -> NSAttributedString {
-        let attributedTitle = NSMutableAttributedString(string: "\(value)", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
-        attributedTitle.append(NSMutableAttributedString(string: "\(text)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
+        let attributedTitle = NSMutableAttributedString(string: " \(value)", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+        attributedTitle.append(NSMutableAttributedString(string: " \(text)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
         return attributedTitle
     }
 }

@@ -13,7 +13,6 @@ class FeedController: UICollectionViewController {
     
     
     //MARK: Properties
-    
     var user: User? {
         didSet{
             configureLeftBarButton()
@@ -27,7 +26,6 @@ class FeedController: UICollectionViewController {
             }
         }
     }
-    
     
     //MARK: API
     func fetchTweets() {
@@ -71,13 +69,12 @@ class FeedController: UICollectionViewController {
 //        profileImageView.backgroundColor = .twitterBlue
         profileImageView.setDimensions(width: 32, height: 32)
         profileImageView.layer.cornerRadius = 32 / 2
-        profileImageView.layer.masksToBounds = true
+        profileImageView.layer.masksToBounds = truecz
         profileImageView.sd_setImage(with: user.profileImageUrl)
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileImageView)
     }
 }
-
 
 //MARK: CollectionView/ DataSource
 extension FeedController {
@@ -99,15 +96,16 @@ extension FeedController {
         let vc = TweetContoller(tweet: tweets[indexPath.row])
         navigationController?.pushViewController(vc, animated: true)
     }
-    
 }
-
 
 //MARK: UICollectionViewFlowLayout
 extension FeedController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 120)
+        let viewModel = TweetViewModel(tweet: tweets[indexPath.row])
+        let height = viewModel.size(withWidth: view.frame.width).height
+        
+        return CGSize(width: view.frame.width, height: height + 80)
     }
 }
 
