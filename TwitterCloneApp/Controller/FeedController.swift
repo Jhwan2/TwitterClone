@@ -69,7 +69,7 @@ class FeedController: UICollectionViewController {
 //        profileImageView.backgroundColor = .twitterBlue
         profileImageView.setDimensions(width: 32, height: 32)
         profileImageView.layer.cornerRadius = 32 / 2
-        profileImageView.layer.masksToBounds = truecz
+        profileImageView.layer.masksToBounds = true
         profileImageView.sd_setImage(with: user.profileImageUrl)
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileImageView)
@@ -111,6 +111,15 @@ extension FeedController: UICollectionViewDelegateFlowLayout {
 
 //MARK: TweetCellDelegate
 extension FeedController: TweetCellDelegate {
+    func handleReplyTapped(_ cell: TweetCell) {
+        guard let tweet = cell.tweet else { return }
+        let cv = UploadTweetController(user: tweet.user, config: .reply(tweet))
+        let nav = UINavigationController(rootViewController: cv)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
+        
+    }
+    
     func handleProfileImageTapped(_ cell: TweetCell) {
         guard let user = cell.tweet?.user else { return }
         let controller = ProfileController(user: user)
