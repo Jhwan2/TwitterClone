@@ -14,7 +14,7 @@ class TweetContoller: UICollectionViewController {
     
     //MARK: Properties
     private let tweet: Tweet
-    private let actionSheetLauncher: ActionSheetLauncher
+    private var actionSheetLauncher: ActionSheetLauncher!
     
     private var replies = [Tweet]() {
         didSet {
@@ -27,7 +27,6 @@ class TweetContoller: UICollectionViewController {
     //MARK: LifeCycle
     init(tweet: Tweet){
         self.tweet = tweet
-        self.actionSheetLauncher = ActionSheetLauncher(user: tweet.user)
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
     }
     
@@ -56,6 +55,13 @@ class TweetContoller: UICollectionViewController {
         collectionView.register(TweetCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.register(TweetHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifier)
     }
+    
+    fileprivate func showActionSheet(forUser user: User) {
+        actionSheetLauncher = ActionSheetLauncher(user: tweet.user)
+        self.actionSheetLauncher.delegate = self
+        actionSheetLauncher.show()
+    }
+
 }
 
 
@@ -101,8 +107,37 @@ extension TweetContoller: UICollectionViewDelegateFlowLayout {
 //MARK: TweetheaderDelegate
 extension TweetContoller: TweetheaderDelegate {
     func showActionSheet() {
-        actionSheetLauncher.show()
+        if tweet.user.isCurrentUser {
+            showActionSheet(forUser: tweet.user)
+        } else {
+            UserService.shard.checkIfUserIsFollowed(uid: tweet.user.uid) { isFollowed in
+                var user = self.tweet.user
+                user.isFollowed = isFollowed
+                print("DEBUG: user isFollowed = \(isFollowed)")
+                self.showActionSheet(forUser: user)
+            }
+        }
     }
     
     
+}
+
+//MARK: ActionSheetLauncherDelegate
+extension TweetContoller: ActionSheetLauncherDelegate {
+    func didSelect(option: ActionSheetOption) {
+        switch option {
+        case .follow(let user):
+            UserService.shard.followUser(uid: user.uid) { err, ref in
+                print("DEBUG: Did follow user \(user.username)")
+            }
+        case .unfollow(let user):
+            UserService.shard.unfollowUser(uid: user.uid) { err, ref in
+                print("DEBUG: Did unfollow user \(user.username)")
+            }
+        case .report:
+            print("DEBUG: Report tweet")
+        case .delete:
+            print("DEBUG: Delete tweet")
+        }
+    }
 }
