@@ -18,7 +18,6 @@ struct ActionSheetViewModel {
             results.append(.delete)
         } else {
             let followOption: ActionSheetOption = user.isFollowed ? .unfollow(user) : .follow(user)
-            print("DEBUG: follow Option add.. \(user.isFollowed)")
             results.append(followOption)
         }
         results.append(.report)

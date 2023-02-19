@@ -57,7 +57,7 @@ class TweetContoller: UICollectionViewController {
     }
     
     fileprivate func showActionSheet(forUser user: User) {
-        actionSheetLauncher = ActionSheetLauncher(user: tweet.user)
+        actionSheetLauncher = ActionSheetLauncher(user: user)
         self.actionSheetLauncher.delegate = self
         actionSheetLauncher.show()
     }
@@ -113,7 +113,6 @@ extension TweetContoller: TweetheaderDelegate {
             UserService.shard.checkIfUserIsFollowed(uid: tweet.user.uid) { isFollowed in
                 var user = self.tweet.user
                 user.isFollowed = isFollowed
-                print("DEBUG: user isFollowed = \(isFollowed)")
                 self.showActionSheet(forUser: user)
             }
         }
