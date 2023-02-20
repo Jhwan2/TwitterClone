@@ -77,6 +77,9 @@ class UploadTweetController: UIViewController {
         guard let caption = captionTextView.text else { return }
         TweetService.shard.uploadTweet(caption: caption, type: config) { ref, error in
 //            print("seccessfully upload Tweet")
+            if case .reply(let tweet) = self.config {
+                NotificationService.shared.uploadNotification(type: .reply, tweet: tweet)
+            }
             self.dismiss(animated: true)
         }
     }

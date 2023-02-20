@@ -15,6 +15,10 @@
 		D86D1CA1299F60410020C5F8 /* ActionSheetLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D1CA0299F60410020C5F8 /* ActionSheetLauncher.swift */; };
 		D86D1CA329A0B5B30020C5F8 /* ActionSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D1CA229A0B5B30020C5F8 /* ActionSheetCell.swift */; };
 		D86D1CA529A0BCB70020C5F8 /* ActionSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D1CA429A0BCB70020C5F8 /* ActionSheetViewModel.swift */; };
+		D86D1CA729A3516C0020C5F8 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D1CA629A3516C0020C5F8 /* Notification.swift */; };
+		D86D1CA929A353D70020C5F8 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D1CA829A353D70020C5F8 /* NotificationService.swift */; };
+		D86D1CAB29A35C160020C5F8 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D1CAA29A35C160020C5F8 /* NotificationCell.swift */; };
+		D86D1CAD29A363A30020C5F8 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D1CAC29A363A30020C5F8 /* NotificationViewModel.swift */; };
 		D8A1C8962962C899008500AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A1C8952962C899008500AB /* AppDelegate.swift */; };
 		D8A1C8982962C899008500AB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A1C8972962C899008500AB /* SceneDelegate.swift */; };
 		D8A1C89D2962C899008500AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8A1C89B2962C899008500AB /* Main.storyboard */; };
@@ -58,6 +62,10 @@
 		D86D1CA0299F60410020C5F8 /* ActionSheetLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheetLauncher.swift; sourceTree = "<group>"; };
 		D86D1CA229A0B5B30020C5F8 /* ActionSheetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheetCell.swift; sourceTree = "<group>"; };
 		D86D1CA429A0BCB70020C5F8 /* ActionSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheetViewModel.swift; sourceTree = "<group>"; };
+		D86D1CA629A3516C0020C5F8 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		D86D1CA829A353D70020C5F8 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		D86D1CAA29A35C160020C5F8 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
+		D86D1CAC29A363A30020C5F8 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		D8A1C8922962C899008500AB /* TwitterCloneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterCloneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8A1C8952962C899008500AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8A1C8972962C899008500AB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -165,6 +173,7 @@
 				D8A1C8C6296C2270008500AB /* AuthService.swift */,
 				D8A1C8C8296D48F7008500AB /* UserService.swift */,
 				D8A1C8D0296FE891008500AB /* TweetService.swift */,
+				D86D1CA829A353D70020C5F8 /* NotificationService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -192,6 +201,7 @@
 				D8A1C8E02990D983008500AB /* ProfileHeaderViewModel.swift */,
 				D86D1C9E299F4C9C0020C5F8 /* UplaodTweetViewModel.swift */,
 				D86D1CA429A0BCB70020C5F8 /* ActionSheetViewModel.swift */,
+				D86D1CAC29A363A30020C5F8 /* NotificationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -207,6 +217,7 @@
 				D86D1C982999F3B70020C5F8 /* UserCell.swift */,
 				D86D1C9C299B84730020C5F8 /* TweetHeader.swift */,
 				D86D1CA229A0B5B30020C5F8 /* ActionSheetCell.swift */,
+				D86D1CAA29A35C160020C5F8 /* NotificationCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -216,6 +227,7 @@
 			children = (
 				D8A1C8CA296D4E8E008500AB /* User.swift */,
 				D8A1C8D2296FEFBD008500AB /* Tweet.swift */,
+				D86D1CA629A3516C0020C5F8 /* Notification.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -365,6 +377,7 @@
 				D8A1C8C5296C12ED008500AB /* Constans.swift in Sources */,
 				D86D1CA329A0B5B30020C5F8 /* ActionSheetCell.swift in Sources */,
 				D8A1C8962962C899008500AB /* AppDelegate.swift in Sources */,
+				D86D1CAD29A363A30020C5F8 /* NotificationViewModel.swift in Sources */,
 				D8A1C8982962C899008500AB /* SceneDelegate.swift in Sources */,
 				D86D1C9B299B82030020C5F8 /* TweetController.swift in Sources */,
 				D8A1C8D9298BA79C008500AB /* ProfileController.swift in Sources */,
@@ -372,16 +385,19 @@
 				D8A1C8BD29658324008500AB /* LoginController.swift in Sources */,
 				D8A1C8C7296C2270008500AB /* AuthService.swift in Sources */,
 				D8A1C8CD296D6517008500AB /* UploadTweetController.swift in Sources */,
+				D86D1CA729A3516C0020C5F8 /* Notification.swift in Sources */,
 				D86D1C9F299F4C9C0020C5F8 /* UplaodTweetViewModel.swift in Sources */,
 				D8A1C8E12990D983008500AB /* ProfileHeaderViewModel.swift in Sources */,
 				D8A1C8D5298A45F3008500AB /* TweetCell.swift in Sources */,
 				D8A1C8CB296D4E8E008500AB /* User.swift in Sources */,
 				D8A1C8B02962C9D1008500AB /* MainTabController.swift in Sources */,
 				D8A1C8BA29657AE0008500AB /* Extensions.swift in Sources */,
+				D86D1CA929A353D70020C5F8 /* NotificationService.swift in Sources */,
 				D8A1C8B22962CA44008500AB /* FeedController.swift in Sources */,
 				D86D1C9D299B84730020C5F8 /* TweetHeader.swift in Sources */,
 				D8A1C8D7298B9ABF008500AB /* TweetViewModel.swift in Sources */,
 				D86D1CA529A0BCB70020C5F8 /* ActionSheetViewModel.swift in Sources */,
+				D86D1CAB29A35C160020C5F8 /* NotificationCell.swift in Sources */,
 				D8A1C8BF29658351008500AB /* RegistrationController.swift in Sources */,
 				D8A1C8B42962CA5C008500AB /* ExploerController.swift in Sources */,
 				D8A1C8DD2990C1B9008500AB /* ProfileFilterView.swift in Sources */,
