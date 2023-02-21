@@ -15,13 +15,27 @@ class ProfileController: UICollectionViewController {
     //MARK: Properties
     private var user: User
     
-    private var tweets = [Tweet]() {
-        didSet{
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
+    private var selectedFilter: ProfileFilterOptions = .tweets {
+        didSet {
+            collectionView.reloadData()
         }
     }
+    
+    private var tweets = [Tweet]()
+    private var likedTweets = [Tweet]()
+    private var replies = [Tweet]()
+    
+    private var currentDataSource: [Tweet] {
+        switch selectedFilter {
+        case .tweets:
+            return tweets
+        case .replies:
+            return replies
+        case .likes:
+            return likedTweets
+        }
+    }
+    
 
     
     //MARK: LifeCycle
@@ -40,6 +54,8 @@ class ProfileController: UICollectionViewController {
         fetchTweet()
         checkIfUserIsFollowed()
         fetchUserStats()
+        fetchLikedTweets()
+        fetchReplies()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -57,6 +73,7 @@ class ProfileController: UICollectionViewController {
     func fetchTweet() {
         TweetService.shard.fetchTweets(forUser: user) { tweets in
             self.tweets = tweets
+            self.collectionView.reloadData()
         }
     }
     
@@ -64,6 +81,18 @@ class ProfileController: UICollectionViewController {
         UserService.shard.checkIfUserIsFollowed(uid: user.uid) { isFollowed in
             self.user.isFollowed = isFollowed
             self.collectionView.reloadData()
+        }
+    }
+    
+    func fetchLikedTweets() {
+        TweetService.shard.fetchLikes(forUser: user) { tweets in
+            self.likedTweets = tweets
+        }
+    }
+    
+    func fetchReplies() {
+        TweetService.shard.fetchReplies(forUser: user) { tweets in
+            self.replies = tweets
         }
     }
     
@@ -81,6 +110,9 @@ class ProfileController: UICollectionViewController {
         
         collectionView.register(TweetCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifier)
+        
+        guard let tabHeight = tabBarController?.tabBar.frame.height else { return }
+        collectionView.contentInset.bottom = tabHeight
     }
 }
 
@@ -98,11 +130,11 @@ extension ProfileController {
 //MARK: UICollectionViewData Source
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tweets.count
+        return currentDataSource.count
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! TweetCell
-        cell.tweet = tweets[indexPath.row]
+        cell.tweet = currentDataSource[indexPath.row]
         return cell
     }
 }
@@ -115,12 +147,19 @@ extension ProfileController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 120)
+        let viewModel = TweetViewModel(tweet: currentDataSource[indexPath.row])
+        let height = viewModel.size(withWidth: view.frame.width).height
+        
+        return CGSize(width: view.frame.width, height: height + 80)
     }
 }
 
 //MARK: ProfileHeaderDelegate
 extension ProfileController: ProfileHeaderDelegate {
+    func didSelect(filter: ProfileFilterOptions) {
+        self.selectedFilter = filter
+    }
+    
     func handleEditProfileFollow(_ Header: ProfileHeader) {
         if user.isCurrentUser {
             print("DEBUG: my profile..")

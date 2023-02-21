@@ -129,7 +129,7 @@ extension FeedController: TweetCellDelegate {
             cell.tweet?.likes = likes
             
             guard !tweet.didLike else { return }
-            NotificationService.shared.uploadNotification(type: .like)
+            NotificationService.shared.uploadNotification(type: .like, tweet: tweet)
         }
     }
     

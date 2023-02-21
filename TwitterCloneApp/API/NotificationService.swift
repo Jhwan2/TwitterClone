@@ -15,6 +15,7 @@ struct NotificationService {
         var values: [String: Any] = ["timestamp": Int(NSDate().timeIntervalSince1970),
                                      "uid": uid,
                                      "type": type.rawValue]
+        print("DEBUG: notification Info = \(values)")
         if let tweet = tweet {
             values["tweetID"] = tweet.tweetID
             REF_NOTIFICATION.child(tweet.user.uid).childByAutoId().updateChildValues(values)

@@ -10,6 +10,7 @@ import UIKit
 protocol ProfileHeaderDelegate: class {
     func handleDissmissal()
     func handleEditProfileFollow(_ Header: ProfileHeader)
+    func didSelect(filter: ProfileFilterOptions)
 }
 
 class ProfileHeader: UICollectionReusableView {
@@ -88,12 +89,6 @@ class ProfileHeader: UICollectionReusableView {
         return lb
     }()
     
-    private let underLineView: UIView = {
-       let view = UIView()
-        view.backgroundColor = .twitterBlue
-        return view
-    }()
-    
     private let followingLabel: UILabel = {
         let lb = UILabel()
         let followTap = UITapGestureRecognizer(target: self, action: #selector(handleFollowersTapped))
@@ -151,9 +146,6 @@ class ProfileHeader: UICollectionReusableView {
         
         addSubview(filterBar)
         filterBar.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor,height: 50)
-        
-        addSubview(underLineView)
-        underLineView.anchor(left: leftAnchor, bottom: bottomAnchor, width: frame.width/3, height: 2)
     }
     
     required init?(coder: NSCoder) {
@@ -194,12 +186,8 @@ class ProfileHeader: UICollectionReusableView {
 
 //MARK:  ProfileFilterViewDelegate
 extension ProfileHeader: ProfileFilterViewDelegate {
-    func filterView(_ view: ProfileFilterView, didSelect indexPath: IndexPath) {
-        guard let cell = view.collectionView.cellForItem(at: indexPath) as? ProfileFileterCell else { return }
-        
-        let xPosition = cell.frame.origin.x
-        UIView.animate(withDuration: 0.3) {
-            self.underLineView.frame.origin.x = xPosition
-        }
+    func filterView(_ view: ProfileFilterView, didSelect index: Int) {
+        guard let filter = ProfileFilterOptions(rawValue: index) else { return }
+        delegate?.didSelect(filter: filter)
     }
 }

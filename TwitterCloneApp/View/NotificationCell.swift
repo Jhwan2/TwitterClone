@@ -61,6 +61,9 @@ class NotificationCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        //Required to start handler
+        contentView.isUserInteractionEnabled = false
+        
         let stack = UIStackView(arrangedSubviews: [profileImageView, notificationLabel])
         stack.spacing = 8
         stack.alignment = .center
@@ -101,5 +104,6 @@ class NotificationCell: UITableViewCell {
         
         followButton.isHidden = viewModel.shouldHideFollowButton
         followButton.setTitle(viewModel.followButtonText, for: .normal)
+        
     }
 }

@@ -25,7 +25,10 @@ struct TweetService {
                 REF_USER_TWEETS.child(uid).updateChildValues([tweetID: 1], withCompletionBlock: completion)
             }
         case .reply(let tweet):
-            REF_TWEET_REPLIES.child(tweet.tweetID).childByAutoId().updateChildValues(value, withCompletionBlock: completion)
+            REF_TWEET_REPLIES.child(tweet.tweetID).childByAutoId().updateChildValues(value) { err, ref in
+                guard let replykey = ref.key else { return }
+                REF_USER_REPLIES.child(uid).updateChildValues([tweet.tweetID: replykey], withCompletionBlock: completion)
+            }
         }
     }
     
@@ -66,6 +69,24 @@ struct TweetService {
                 let tweet = Tweet(user: user,tweetID: tweetID, dic: dic)
                 completion(tweet)
             }
+        }
+    }
+    
+    func fetchReplies(forUser user: User, completion: @escaping([Tweet]) -> Void) {
+        var replies = [Tweet]()
+        REF_USER_REPLIES.child(user.uid).observe(.childAdded) { snapshot in
+            let tweetKey = snapshot.key
+            guard let replyKey = snapshot.value as? String else { return }
+            REF_TWEET_REPLIES.child(tweetKey).child(replyKey).observeSingleEvent(of: .value) { snapshot in
+                guard let dic = snapshot.value as? [String:Any] else { return }
+                guard let uid = dic["uid"] as? String else { return }
+                
+                UserService.shard.fetchUser(uid: uid) { user in
+                    let tweet = Tweet(user: user,tweetID: tweetKey, dic: dic)
+                    replies.append(tweet)
+                    completion(replies)
+                }
+            }
             
         }
     }
@@ -80,6 +101,20 @@ struct TweetService {
             
             UserService.shard.fetchUser(uid: uid) { user in
                 let tweet = Tweet(user: user,tweetID: tweetID, dic: dic)
+                tweets.append(tweet)
+                completion(tweets)
+            }
+        }
+    }
+    
+    func fetchLikes(forUser user:User, completion: @escaping([Tweet]) -> Void) {
+        var tweets = [Tweet]()
+        
+        REF_USER_LIKES.child(user.uid).observe(.childAdded) { snapshot in
+            let tweetID = snapshot.key
+            self.fetchTweet(withTweetID: tweetID) { likedTweet in
+                var tweet = likedTweet
+                tweet.didLike = true
                 tweets.append(tweet)
                 completion(tweets)
             }
@@ -110,8 +145,5 @@ struct TweetService {
             completion(snapshot.exists())
         }
     }
-    
-    
-    
-    
+
 }
