@@ -48,7 +48,7 @@ class TweetContoller: UICollectionViewController {
         }
     }
     
-    
+
     //MARK: Helpers
     func configureCollectionView() {
         collectionView.backgroundColor = .white
