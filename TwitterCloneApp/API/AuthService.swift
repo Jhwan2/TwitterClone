@@ -19,12 +19,14 @@ struct AuthCredentials {
 struct AuthService {
     static let shard = AuthService()
     
-    func logUserIn(withEmail email: String, password: String, completion: @escaping (AuthDataResult?,Error?) -> Void) {
+    func logUserIn(withEmail email: String, password: String,
+                   completion: @escaping (AuthDataResult?,Error?) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password, completion: completion)
         
     }
     
-    func registerUser(credentail: AuthCredentials, completion: @escaping(Error?, DatabaseReference)-> Void) {
+    func registerUser(credentail: AuthCredentials,
+                      completion: @escaping(Error?, DatabaseReference)-> Void) {
         let email = credentail.email
         let pw = credentail.password
         let fullname = credentail.fullname
@@ -43,7 +45,8 @@ struct AuthService {
                         print(error.localizedDescription)
                     }
                     guard let uid = result?.user.uid else { return }
-                    let values = ["email":email, "username":username, "fullname": fullname, "profileImageUrl": profileImageUrl]
+                    let values = ["email": email, "username": username,
+                                  "fullname": fullname, "profileImageUrl": profileImageUrl]
                     
                     REF_USERS.child(uid).updateChildValues(values, withCompletionBlock: completion)
                 }

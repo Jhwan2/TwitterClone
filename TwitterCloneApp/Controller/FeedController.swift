@@ -15,7 +15,7 @@ class FeedController: UICollectionViewController {
     
     //MARK: Properties
     var user: User? {
-        didSet{
+        didSet {
             configureLeftBarButton()
         }
     }

@@ -7,9 +7,10 @@
 import Firebase
 import UIKit
 
-class MainTabController: UITabBarController {
+final class MainTabController: UITabBarController {
     
     //MARK: Properties
+    
     var user: User? {
         didSet{
             guard let nav = viewControllers?[0] as? UINavigationController else { return }
@@ -18,8 +19,7 @@ class MainTabController: UITabBarController {
         }
     }
     
-    
-    let actionButton: UIButton = {
+    private let actionButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.backgroundColor = .twitterBlue
         btn.tintColor = .white
@@ -29,6 +29,7 @@ class MainTabController: UITabBarController {
     }()
     
     //MARK: LifeCycles
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        UserLogOut()
@@ -37,6 +38,7 @@ class MainTabController: UITabBarController {
     }
     
     //MARK: API
+    
     func fetchUser() {
         guard let uid = Auth.auth().currentUser?.uid as? String else { return }
         UserService.shard.fetchUser(uid: uid) { user in
@@ -117,5 +119,9 @@ class MainTabController: UITabBarController {
         return nav
     }
     
+    
+}
+
+private extension MainTabController {
     
 }
